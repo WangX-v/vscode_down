@@ -1,0 +1,15 @@
+name: fetch-vscode-server
+on: workflow_dispatch
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download official server
+        run: curl -fL --retry 5 -o vscode-server-linux-x64.tar.gz "https://update.code.visualstudio.com/commit:7e7950df89d055b5a378379db9ee14290772148a/server-linux-x64/stable"
+      - name: Show size
+        run: ls -lh vscode-server-linux-x64.tar.gz
+      - name: Upload for you to download
+        uses: actions/upload-artifact@v4
+        with:
+          name: vscode-server-linux-x64
+          path: vscode-server-linux-x64.tar.gz
